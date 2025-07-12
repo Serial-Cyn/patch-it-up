@@ -1,0 +1,20 @@
+# Godot-specific folders
+.import/
+.godot/
+mono/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Export files (optional)
+export.cfg
+export_presets.cfg
+
+# Android/iOS folders (if you're not targeting mobile)
+android/
+ios/
