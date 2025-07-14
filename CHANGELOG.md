@@ -2,6 +2,21 @@
 
 All notable changes to this game project will be documented in this file.
 
+## [v0.2.0] – 2025-07-14
+
+### Added
+- New `StopPoint` system that can be patched by the player
+- Safe zone detection via Area2D; timer now pauses when inside
+- `"patch"` input support for interacting with glitch objects
+
+### Changed
+- Player script now tracks `is_in_safe_zone` to control corruption timer
+- Stop zones are only active after being patched
+
+### Fixed
+- Timer no longer auto-unpauses when idle inside a patched zone
+- Glitch tile interaction no longer conflicts with StopPoint behavior
+
 ## [v0.1.0] – 2025-07-13
 ### Added
 - Player movement using `Input.get_action_strength()` for smooth left/right control

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-@onready var corruption_timer: Timer = $CorruptionTimer
+@onready var corruption_timer: Timer = $"../GameManager/CorruptionTimer"
 
 const SPEED : float = 100.0
 const JUMP_VELOCITY : float = -300.0
@@ -11,9 +11,12 @@ const GRAVITY : float = 900.0
 var direction : int
 var move_left : int
 var move_right : int
+
 # States
 var is_airborne : bool
 var is_moving : bool
+var is_in_safe_zone : bool = false
+
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
@@ -54,7 +57,12 @@ func handle_animation():
 			animated_sprite.flip_h = direction < 0
 
 func handle_corruption_timer():
+	# Only pause the timer when either:
+	# - The player is moving
+	# - OR the player is in a patched stop zone
 	is_moving = move_left > 0 or move_right > 0
-	corruption_timer.paused = is_moving
 	
-	print(corruption_timer.time_left)
+	if is_moving or is_in_safe_zone:
+		corruption_timer.paused = true
+	else:
+		corruption_timer.paused = false
