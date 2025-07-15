@@ -2,6 +2,36 @@
 
 All notable changes to this game project will be documented in this file.
 
+## [v0.2.1] – 2025-07-15
+
+### Added
+- Dynamic sound effect system via `AudioStreamPlayer2D`
+    - Centralized sound manager with enum-based `SFX` lookup
+    - Sound effects added:
+        - `PICK_UP`
+        - `EXPLOSION`
+        - `HURT`
+        - `JUMP`
+        - `PATCH`
+        - `TAP`
+    - Supports overlapping sounds by instancing temporary players
+    - Pitch variation for more natural feedback
+    - Auto-cleanup using `finished` signal (Godot 4)
+- Enhanced corruption timer display
+    - Displays whole seconds by default
+    - Switches to two decimal places in final countdown
+    - Timer starts only after the player moves for the first time
+
+### Changed
+- Refactored `play_sfx()` to dynamically create and free sound players
+- Player script updated to track `has_moved` and control timer start
+- Timer label repositioned and anchored to stay centered at all times
+- UI viewport scaling and font settings adjusted to improve clarity
+
+### Fixed
+- Timer no longer begins before any player input
+- Label visibility issues caused by layering or camera movement
+
 ## [v0.2.0] – 2025-07-14
 
 ### Added

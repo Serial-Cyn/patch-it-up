@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var game_manager: Node = %GameManager
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var corruption_timer: Timer = $"../GameManager/CorruptionTimer"
 
@@ -24,7 +25,6 @@ func _physics_process(delta: float) -> void:
 	handle_animation()
 	handle_corruption_timer()
 	move_and_slide()
-
 
 func handle_movement():
 	move_left = Input.get_action_strength("move_left")
@@ -63,6 +63,9 @@ func handle_corruption_timer():
 	is_moving = move_left > 0 or move_right > 0
 	
 	if is_moving or is_in_safe_zone:
+		if not game_manager.has_moved:
+			game_manager.has_moved = true # Starts the timer
+
 		corruption_timer.paused = true
 	else:
 		corruption_timer.paused = false

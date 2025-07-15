@@ -5,6 +5,7 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite
 @onready var fix_area: Area2D = $FixArea
 @onready var stop_area: Area2D = $StopArea
+@onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 
 # --- State Flags ---
 var is_patched: bool = false
@@ -39,6 +40,8 @@ func patch_stop_point():
 
 	is_patched = true
 	sprite.frame = 4               # Show fixed/patched sprite
+	sound_effects.play_sfx(sound_effects.SFX.PATCH)
+	
 	fix_area.queue_free()          # Remove fix interaction
 	stop_area.monitoring = true    # Activate stop zone
 

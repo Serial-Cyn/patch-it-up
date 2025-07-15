@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://b3ejkg8i1sacb"]
+[gd_scene load_steps=9 format=4 uid="uid://b3ejkg8i1sacb"]
 
 [ext_resource type="Script" uid="uid://cwpqxg0mgikx1" path="res://scripts/game_manager.gd" id="1_iywne"]
 [ext_resource type="Texture2D" uid="uid://cvmdi5akpghux" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dpfp2gvrhdnd2" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b57ykvmcupq2j" path="res://scenes/glitch_tile.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dihoti1hrgw6e" path="res://scenes/stop_point.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="6_p57ef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("1_yqjtg")
@@ -179,7 +180,6 @@ script = ExtResource("1_iywne")
 [node name="CorruptionTimer" type="Timer" parent="GameManager"]
 wait_time = 60.0
 one_shot = true
-autostart = true
 
 [node name="Tilemaps" type="Node" parent="."]
 
@@ -188,10 +188,11 @@ tile_map_data = PackedByteArray("AAD5/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD7/wEAAQAAAAA
 tile_set = SubResource("TileSet_iywne")
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+unique_name_in_owner = true
 position = Vector2(0, 4)
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="GlitchTile" parent="." instance=ExtResource("3_lnu2h")]
@@ -202,3 +203,24 @@ position = Vector2(136, 24)
 
 [node name="StopPoint" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(168, 6)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CorruptionLabel" type="Label" parent="CanvasLayer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "60"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundEffects" parent="." instance=ExtResource("6_p57ef")]
+unique_name_in_owner = true
