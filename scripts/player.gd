@@ -9,6 +9,8 @@ const JUMP_VELOCITY : float = -300.0
 const GRAVITY : float = 900.0
 
 # Movement
+var gravity_direction : int
+var reverse_control : int
 var direction : int
 var move_left : int
 var move_right : int
@@ -18,6 +20,9 @@ var is_airborne : bool
 var is_moving : bool
 var is_in_safe_zone : bool = false
 
+func _ready() -> void:
+	gravity_direction = -1
+	reverse_control = -1
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
@@ -31,7 +36,7 @@ func handle_movement():
 	move_right = Input.get_action_strength("move_right")
 	
 	direction = move_right - move_left
-	velocity.x = direction * SPEED
+	velocity.x = reverse_control * direction * SPEED
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -39,14 +44,14 @@ func handle_movement():
 func apply_gravity(delta):
 	is_airborne = not is_on_floor()
 	if is_airborne:
-		velocity.y += GRAVITY * delta
+		velocity.y += gravity_direction * GRAVITY * delta
 
 func handle_animation():
 	if not is_airborne:
 		if direction != 0:
 			if animated_sprite.animation != "run":
 				animated_sprite.play("run")
-			animated_sprite.flip_h = direction < 0
+			animated_sprite.flip_h = reverse_control * direction < 0
 		else:
 			if animated_sprite.animation != "idle":
 				animated_sprite.play("idle")
@@ -54,7 +59,7 @@ func handle_animation():
 		if animated_sprite.animation != "jump":
 			animated_sprite.play("jump")
 		if direction != 0:
-			animated_sprite.flip_h = direction < 0
+			animated_sprite.flip_h = reverse_control * direction < 0
 
 func handle_corruption_timer():
 	# Only pause the timer when either:

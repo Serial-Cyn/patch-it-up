@@ -2,6 +2,23 @@
 
 All notable changes to this game project will be documented in this file.
 
+## [v0.3.0] – 2025-07-16
+
+### Added
+- New Tileset
+- Level 1
+    - Reversed gravity and controls
+    - Layout is finished
+    - Layout is upward progression
+- Level Switcher is functional
+
+### Issues
+- Spamming left and right can be exploited by the players to avoid the timer
+
+### Changed
+- Camera view is now zoomed out a little bit from the original 3x to 2.5x
+- New tileset has been implemented to give the world a new look
+
 ## [v0.2.1] – 2025-07-15
 
 ### Added

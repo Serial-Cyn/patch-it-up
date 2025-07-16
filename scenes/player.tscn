@@ -104,7 +104,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -179,8 +179,10 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a38lo")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
+frame = 2
+frame_progress = 0.0584927
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 4)
