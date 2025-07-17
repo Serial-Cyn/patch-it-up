@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=4 uid="uid://b3ejkg8i1sacb"]
+[gd_scene load_steps=12 format=4 uid="uid://b3ejkg8i1sacb"]
 
 [ext_resource type="Script" uid="uid://cwpqxg0mgikx1" path="res://scripts/game_manager.gd" id="1_iywne"]
 [ext_resource type="Texture2D" uid="uid://cvmdi5akpghux" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dpfp2gvrhdnd2" path="res://scenes/player.tscn" id="2_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://3aon2gwj4y87" path="res://assets/sprites/patch-tileset.png" id="2_p57ef"]
+[ext_resource type="Texture2D" uid="uid://bmt3ia7edijwn" path="res://assets/sprites/patch-tileset.png" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b57ykvmcupq2j" path="res://scenes/glitch_tile.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dihoti1hrgw6e" path="res://scenes/stop_point.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cxca8wyds6jsp" path="res://scenes/death_zone.tscn" id="8_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("1_yqjtg")
@@ -270,3 +271,12 @@ vertical_alignment = 1
 
 [node name="SoundEffects" parent="." instance=ExtResource("6_p57ef")]
 unique_name_in_owner = true
+
+[node name="DeathZone" type="Node" parent="."]
+
+[node name="Bottom" parent="DeathZone" instance=ExtResource("8_gee14")]
+position = Vector2(0, 212)
+
+[node name="Top" parent="DeathZone" instance=ExtResource("8_gee14")]
+position = Vector2(0, -174)
+rotation = -3.14159
