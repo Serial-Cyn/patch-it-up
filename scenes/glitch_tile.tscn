@@ -21,6 +21,5 @@ shape = SubResource("RectangleShape2D_r784y")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
