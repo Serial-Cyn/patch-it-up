@@ -21,8 +21,8 @@ var is_moving : bool
 var is_in_safe_zone : bool = false
 
 func _ready() -> void:
-	gravity_direction = -1
-	reverse_control = -1
+	gravity_direction = 1
+	reverse_control = 1
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
