@@ -24,3 +24,4 @@ func update_timer(time_left : float):
 		corruption_label.text = str(int(time_left))		# Show whole numbers
 	else:
 		corruption_label.text = "%.2f" % (time_left)	# Show 2 decimal places
+		corruption_label.modulate = Color(1, 0, 0)

@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var game_manager: Node = %GameManager
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var corruption_timer: Timer = $"../GameManager/CorruptionTimer"
+@onready var main_camera: Camera2D = $MainCamera
+@onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 
 const SPEED : float = 100.0
 const JUMP_VELOCITY : float = -300.0
@@ -20,9 +22,24 @@ var is_airborne : bool
 var is_moving : bool
 var is_in_safe_zone : bool = false
 
+# VFX
+var shake_timer : float = 0.0
+var shake_intensity : float = 0.0
+
 func _ready() -> void:
 	gravity_direction = 1
 	reverse_control = 1
+
+func _process(delta: float) -> void:
+	if shake_timer > 0:
+		shake_timer -= delta
+		var offset = Vector2(
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0)
+		) * shake_intensity
+		main_camera.offset = offset
+	else:
+		main_camera.offset = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	handle_movement()
@@ -30,6 +47,10 @@ func _physics_process(delta: float) -> void:
 	handle_animation()
 	handle_corruption_timer()
 	move_and_slide()
+
+func shake_screen(intensity : float, duration : float = 0.3) -> void:
+	shake_intensity = intensity
+	shake_timer = duration
 
 func handle_movement():
 	move_left = Input.get_action_strength("move_left")
@@ -40,6 +61,8 @@ func handle_movement():
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+		sound_effects.play_sfx(sound_effects.SFX.JUMP)
 
 func apply_gravity(delta):
 	is_airborne = not is_on_floor()
