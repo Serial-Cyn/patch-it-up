@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var next_level_timer: Timer = $NextLevelTimer
 @onready var player: CharacterBody2D = %Player
+@onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 
 const FILE_BEGIN = "res://levels/level"
 const FILE_END = ".tscn"
@@ -9,9 +10,21 @@ const FILE_END = ".tscn"
 var current_scene_file
 var current_level
 
+var float_amplitude : float = 3.0
+var float_speed : float = 1.0
+var float_time : float = 0.0
+var original_y : float = 0.0
+
 func _ready() -> void:
 	current_scene_file = get_tree().current_scene.scene_file_path
 	current_level = current_scene_file.to_int()
+	
+	original_y = position.y
+
+
+func _process(delta: float) -> void:
+	float_time += delta  # Keep counting time
+	position.y = original_y + sin(float_time * float_speed * TAU) * float_amplitude
 	
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -19,11 +32,15 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		match current_level:
 			1:
 				player.gravity_direction = 1
-				player.reverse_control = 1
 				
 			2:
 				pass
-		# next_level_timer.start()
+		
+		sound_effects.play_sfx(sound_effects.SFX.PATCH)
+		
+		queue_free() # Destroys the patch
+		
+		next_level_timer.start()
 
 
 func next_level() -> void:

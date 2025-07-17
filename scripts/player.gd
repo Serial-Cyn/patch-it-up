@@ -91,9 +91,6 @@ func handle_corruption_timer():
 	is_moving = move_left > 0 or move_right > 0
 	
 	if is_moving or is_in_safe_zone:
-		if not game_manager.has_moved:
-			game_manager.has_moved = true # Starts the timer
-
 		corruption_timer.paused = true
 	else:
 		corruption_timer.paused = false

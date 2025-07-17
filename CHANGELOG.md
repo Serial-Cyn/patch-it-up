@@ -2,6 +2,27 @@
 
 All notable changes to this game project will be documented in this file.
 
+## [v0.3.1] – 2025-07-17
+
+### Added
+- New Assets!
+    - Player
+    - Glitch Tiles
+    - Patch Object
+- Death Zones so the player will die if he/she falls from the map
+- Added glow effect and floaty effect to patch object
+- Unfinished Level 2
+- Functional SFX like `EXPLOSION`, `JUMP`, and `PATCH`
+
+### Issues
+- No background
+- Avoid coruption by jittering the player
+
+### Changed
+- Corruption time starts as soon as the "corrupted signal" starts
+- Level 1 Layout changed to match a settings
+
+
 ## [v0.3.0] – 2025-07-16
 
 ### Added
