@@ -346,4 +346,6 @@ autostart = true
 [node name="Patch" parent="." instance=ExtResource("7_gwceb")]
 position = Vector2(235, -438)
 
+[node name="Node" type="Node" parent="."]
+
 [connection signal="timeout" from="StartGame" to="." method="_on_start_game_timeout"]
