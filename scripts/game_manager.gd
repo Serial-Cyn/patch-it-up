@@ -3,6 +3,7 @@ extends Node
 @onready var corruption_timer: Timer = $CorruptionTimer
 @onready var corruption_label: Label = %CorruptionLabel
 @onready var restart_timer: Timer = $RestartTimer
+@onready var player: CharacterBody2D = %Player
 
 var patch_sfx = preload("res://assets/sounds/power_up.wav")
 
@@ -30,10 +31,9 @@ func update_timer(time_left : float):
 
 	
 func _on_corruption_timer_timeout() -> void:
-	Engine.time_scale = 0.5
+	player.dead = true
 	restart_timer.start()
 
 
 func _on_restart_timer_timeout() -> void:
 	get_tree().reload_current_scene()
-	Engine.time_scale = 1.0
