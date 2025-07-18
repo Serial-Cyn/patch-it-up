@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://c4vfu36ep35sq"]
 
 [ext_resource type="Script" uid="uid://dkr80ksoj51pq" path="res://scripts/intro.gd" id="1_btoec"]
-[ext_resource type="Texture2D" uid="uid://bmt3ia7edijwn" path="res://assets/sprites/patch-tileset.png" id="1_jirdo"]
+[ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="1_jirdo"]
 [ext_resource type="Texture2D" uid="uid://cvmdi5akpghux" path="res://assets/sprites/world_tileset.png" id="1_vn7o3"]
 [ext_resource type="Script" uid="uid://cwpqxg0mgikx1" path="res://scripts/game_manager.gd" id="2_kx6l7"]
 [ext_resource type="PackedScene" uid="uid://dpfp2gvrhdnd2" path="res://scenes/player.tscn" id="5_n46q3"]
