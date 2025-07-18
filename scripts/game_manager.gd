@@ -4,11 +4,14 @@ extends Node
 @onready var corruption_label: Label = %CorruptionLabel
 @onready var restart_timer: Timer = $RestartTimer
 @onready var player: CharacterBody2D = %Player
+@onready var alarm_effects: Node2D = %AlarmEffects
+@onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 
 var patch_sfx = preload("res://assets/sounds/power_up.wav")
 
 var timer_has_started : bool = false
 var start_game : bool = false
+var blaring : bool = false
 
 
 func _process(_delta):
@@ -25,9 +28,19 @@ func update_timer(time_left : float):
 	if time_left > 5.0:
 		corruption_label.text = str(int(time_left))		# Show whole numbers
 		
+		blaring = false
+		
 	else:
 		corruption_label.text = "%.2f" % (time_left)	# Show 2 decimal places
 		corruption_label.modulate = Color(1, 0, 0)
+		
+		if not blaring:
+			alarm_effects.blare_alarm()
+			sound_effects.play_sfx(sound_effects.SFX.LOW)
+			
+			blaring = true
+			
+			
 
 	
 func _on_corruption_timer_timeout() -> void:

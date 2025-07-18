@@ -3,7 +3,8 @@ extends CharacterBody2D
 @onready var next_level_timer: Timer = $NextLevelTimer
 @onready var player: CharacterBody2D = %Player
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
-@onready var alarm_overlay: Node2D = get_node_or_null("%AlarmEffects")
+
+
 const FILE_BEGIN = "res://levels/level"
 const FILE_END = ".tscn"
 
@@ -33,9 +34,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			1:
 				player.gravity_direction = 1
 				
-				if alarm_overlay:
-					alarm_overlay.stop_alarm()
-					
+				sound_effects.play_sfx(sound_effects.SFX.G_FIX)
+				
 			2:
 				pass
 		

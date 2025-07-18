@@ -23,3 +23,8 @@ func _on_start_game_timeout() -> void:
 	alarm_effects.blare_alarm()
 	player.shake_screen(10.0)
 	sound_effects.play_sfx(sound_effects.SFX.EXPLOSION)
+	sound_effects.play_sfx(sound_effects.SFX.ERROR)
+	
+	await get_tree().create_timer(2.5).timeout # Adjust for actual duration
+	
+	sound_effects.play_sfx(sound_effects.SFX.ERROR)

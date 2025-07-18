@@ -19,6 +19,7 @@ var move_left : int
 var move_right : int
 var not_strafe : bool = true
 var last_position_x : float
+var move_counter : int = 0
 
 # States
 var is_airborne : bool
@@ -28,6 +29,9 @@ var dead : bool = false
 var stay_dead : bool = false
 var was_moving_left : bool = false
 var was_moving_right : bool = false
+var has_warning_said : bool = false
+var warn_player : bool = false
+var strafe_detected : bool = false
 
 # VFX
 var shake_timer : float = 0.0
@@ -109,7 +113,13 @@ func handle_animation():
 
 func start_anti_strafe() -> void:
 	not_strafe = false
-
+	move_counter = move_counter + 1
+	
+	if not strafe_detected and move_counter > 5:
+		sound_effects.play_sfx(sound_effects.SFX.ANTI)
+		
+		strafe_detected = true
+		
 	move_timer.start()
 
 func get_current_dir(moving_left: bool) -> String:
@@ -165,6 +175,12 @@ func check_for_key_strokes() -> void:
 	else:
 		# No input detected
 		is_moving = false
+		
+		if not has_warning_said and warn_player:
+			sound_effects.play_sfx(sound_effects.SFX.STAND)
+			
+			has_warning_said = true
+		
 		reset_movement_flags()
 
 func handle_corruption_timer() -> void:
@@ -178,3 +194,9 @@ func handle_corruption_timer() -> void:
 
 func _on_move_timer_timeout() -> void:
 	not_strafe = true
+	
+	move_counter = 0
+
+
+func _on_warning_timer_timeout() -> void:
+	warn_player = true

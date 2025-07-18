@@ -326,6 +326,18 @@ position_smoothing_enabled = true
 [node name="AlarmEffects" parent="Player" instance=ExtResource("6_5ot28")]
 unique_name_in_owner = true
 
+[node name="Patch" parent="." instance=ExtResource("7_gwceb")]
+position = Vector2(235, -438)
+
+[node name="DeathZone" type="Node" parent="."]
+
+[node name="Bottom" parent="DeathZone" instance=ExtResource("9_3sk1a")]
+position = Vector2(0, 212)
+
+[node name="Top" parent="DeathZone" instance=ExtResource("9_3sk1a")]
+position = Vector2(0, -640)
+rotation = -3.14159
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -348,26 +360,14 @@ text = "60"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SoundEffects" parent="." instance=ExtResource("6_btoec")]
+unique_name_in_owner = true
+
 [node name="StartGame" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 autostart = true
-
-[node name="Patch" parent="." instance=ExtResource("7_gwceb")]
-position = Vector2(235, -438)
-
-[node name="DeathZone" type="Node" parent="."]
-
-[node name="Bottom" parent="DeathZone" instance=ExtResource("9_3sk1a")]
-position = Vector2(0, 212)
-
-[node name="Top" parent="DeathZone" instance=ExtResource("9_3sk1a")]
-position = Vector2(0, -640)
-rotation = -3.14159
-
-[node name="SoundEffects" parent="." instance=ExtResource("6_btoec")]
-unique_name_in_owner = true
 
 [connection signal="timeout" from="GameManager/CorruptionTimer" to="GameManager" method="_on_corruption_timer_timeout"]
 [connection signal="timeout" from="GameManager/RestartTimer" to="GameManager" method="_on_restart_timer_timeout"]

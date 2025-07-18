@@ -2,6 +2,22 @@
 
 All notable changes to this game project will be documented in this file.
 
+## [v0.3.2] – 2025-07-18
+
+### Added
+- New SFX!
+    - `ERROR`
+    - `BREAK`
+    - `STAND`
+    - `GRAVITY_FIX`
+    - `CONTROL_FIX`
+    - `LOW`
+    - `ANTI_STRAFE`
+- New slug sprite and tentative bg
+
+### Fixed
+- Player jittering exploit is no longer applicable.
+
 ## [v0.3.1] – 2025-07-17
 
 ### Added

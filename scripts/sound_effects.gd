@@ -1,6 +1,6 @@
 extends AudioStreamPlayer2D
 
-enum SFX { PICK_UP, EXPLOSION, HURT, JUMP, PATCH, TAP }
+enum SFX { PICK_UP, EXPLOSION, HURT, JUMP, PATCH, TAP, ERROR, ANTI, BREAK, C_FIX, G_FIX, LOW, STAND }
 
 const SOUND_MAP := {
 	SFX.PICK_UP: preload("res://assets/sounds/power_up.wav"),
@@ -9,6 +9,13 @@ const SOUND_MAP := {
 	SFX.JUMP: preload("res://assets/sounds/jump.wav"),
 	SFX.PATCH: preload("res://assets/sounds/power_up.wav"),
 	SFX.TAP: preload("res://assets/sounds/tap.wav"),
+	SFX.ERROR: preload("res://assets/sounds/error.wav"),
+	SFX.ANTI: preload("res://assets/sounds/anti_strafe.wav"),
+	SFX.BREAK: preload("res://assets/sounds/break.wav"),
+	SFX.C_FIX: preload("res://assets/sounds/control_fix.wav"),
+	SFX.G_FIX: preload("res://assets/sounds/gravity_fix.wav"),
+	SFX.LOW: preload("res://assets/sounds/low.wav"),
+	SFX.STAND: preload("res://assets/sounds/stand.wav"),
 }
 
 func play_sfx(sfx_id: SFX):
