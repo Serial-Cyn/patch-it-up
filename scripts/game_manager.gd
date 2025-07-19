@@ -49,7 +49,9 @@ func update_timer(time_left : float):
 func damage_player(amount : float) -> void:
 	if not player.is_invincible:
 		var new_time = corruption_timer.time_left - amount
-		new_time = max(0.0, new_time)
+		
+		if new_time < 0.0:
+			new_time = 0.0
 		
 		player.shake_screen(1.0)
 		sound_effects.play_sfx(sound_effects.SFX.HURT)

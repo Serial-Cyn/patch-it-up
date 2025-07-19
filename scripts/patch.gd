@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 @onready var game_manager: Node = %GameManager
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var area_2d: Area2D = $Area2D
 
 
 const FILE_BEGIN = "res://levels/level_"
@@ -17,6 +18,8 @@ var float_amplitude : float = 3.0
 var float_speed : float = 1.0
 var float_time : float = 0.0
 var original_y : float = 0.0
+
+var taken : bool = false
 
 func _ready() -> void:
 	current_scene_file = get_tree().current_scene.scene_file_path
@@ -31,7 +34,7 @@ func _process(delta: float) -> void:
 	
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and not taken:
 		match current_level:
 			1:
 				player.gravity_direction = 1
@@ -40,7 +43,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				
 			2:
 				pass
-				
+		
+		taken = true
 		game_manager.stop_timer()
 		sound_effects.play_sfx(sound_effects.SFX.PATCH)
 		next_level_timer.start()

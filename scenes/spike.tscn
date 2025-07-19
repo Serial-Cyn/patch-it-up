@@ -85,20 +85,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a7y0"]
-size = Vector2(10, 10)
+size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2mqm"]
-size = Vector2(8, 8)
+size = Vector2(12, 13)
 
 [node name="Spike" type="AnimatableBody2D"]
 script = ExtResource("1_7a7y0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8525u")
+autoplay = "default"
+frame_progress = 0.328992
 
 [node name="HurtBox" type="Area2D" parent="."]
 
