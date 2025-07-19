@@ -565,14 +565,6 @@ position = Vector2(15.9999, -13.0001)
 
 [node name="TriggerArea" type="Area2D" parent="Traps/Chamber3/DeathPlatform"]
 
-[node name="Area2D2" type="Area2D" parent="Traps/Chamber3"]
-position = Vector2(380, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/Chamber3/Area2D2"]
-position = Vector2(1775, -104)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_dpc8t")
-
 [node name="DeathPlatform2" type="Node2D" parent="Traps/Chamber3"]
 position = Vector2(1195, -83)
 
@@ -640,9 +632,10 @@ unique_name_in_owner = true
 
 [node name="SoundEffects" parent="Player" instance=ExtResource("10_ndgrd")]
 unique_name_in_owner = true
-position = Vector2(103, 4)
+position = Vector2(0, -1)
 
 [node name="Boss" parent="." instance=ExtResource("17_uo0vl")]
+unique_name_in_owner = true
 position = Vector2(2181, -96)
 
 [node name="Patch" parent="." instance=ExtResource("8_uo0vl")]
@@ -715,7 +708,6 @@ position = Vector2(1824, -88)
 [connection signal="body_entered" from="Traps/Chamber2/Spike5/LastSpikeDeath" to="Traps/Chamber2" method="_on_last_spike_death_body_entered"]
 [connection signal="body_entered" from="Traps/Chamber3/Area2D" to="Traps/Chamber3" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Traps/Chamber3/Area2D" to="Traps/Chamber3" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="Traps/Chamber3/Area2D2" to="Traps/Chamber3" method="_on_area_2d_2_body_entered"]
 [connection signal="body_entered" from="Patch/RunTrigger" to="Patch" method="_on_run_trigger_body_entered"]
 [connection signal="timeout" from="Patch/StopTimer" to="Patch" method="_on_stop_timer_timeout"]
 [connection signal="timeout" from="StartGame" to="." method="_on_start_game_timeout"]

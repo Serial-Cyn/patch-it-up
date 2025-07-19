@@ -63,10 +63,6 @@ region = Rect2(48, 48, 48, 16)
 atlas = ExtResource("2_485p4")
 region = Rect2(96, 48, 48, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_el7wl"]
-atlas = ExtResource("2_485p4")
-region = Rect2(0, 0, 48, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_137wx"]
 atlas = ExtResource("2_485p4")
 region = Rect2(96, 48, 48, 16)
@@ -86,6 +82,10 @@ region = Rect2(48, 64, 48, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a46y"]
 atlas = ExtResource("2_485p4")
 region = Rect2(96, 64, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el7wl"]
+atlas = ExtResource("2_485p4")
+region = Rect2(0, 0, 48, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6fyb"]
 atlas = ExtResource("2_485p4")
@@ -154,20 +154,7 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mpvso")
-}],
-"loop": false,
-"name": &"charge",
-"speed": 10.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_el7wl")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_137wx")
 }, {
@@ -182,7 +169,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8a46y")
+}],
+"loop": false,
+"name": &"charge",
+"speed": 10.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el7wl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v6fyb")
 }, {
@@ -207,14 +207,13 @@ animations = [{
 size = Vector2(24, 15)
 
 [node name="turret" type="Area2D"]
+z_index = 1
 script = ExtResource("1_el7wl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v6fyb")
 animation = &"shoot"
 autoplay = "idle"
-frame = 9
-frame_progress = 1.0
 
 [node name="gun_area" type="CollisionShape2D" parent="."]
 position = Vector2(-13, 0.5)
@@ -223,6 +222,9 @@ shape = SubResource("RectangleShape2D_eyt2e")
 [node name="ShootCooldown" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(120, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

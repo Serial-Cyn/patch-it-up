@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq84rqmu2rlst"]
+
+[ext_resource type="Texture2D" uid="uid://cm7om3aecoq0r" path="res://assets/sprites/patch-turret_spritesheet.png" id="1_1vc1r"]
+[ext_resource type="Script" uid="uid://oupw7xh54xst" path="res://scenes/turret_projectile.gd" id="1_thpf4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thpf4"]
+size = Vector2(28, 11)
+
+[node name="turret_projectile" type="Area2D"]
+script = ExtResource("1_thpf4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+texture = ExtResource("1_1vc1r")
+region_enabled = true
+region_rect = Rect2(3, 96, 29, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_thpf4")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
