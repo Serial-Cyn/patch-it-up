@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://b35dj1y66tcbh"]
+[gd_scene load_steps=43 format=4 uid="uid://b35dj1y66tcbh"]
 
 [ext_resource type="Script" uid="uid://8vfncm6iybho" path="res://scripts/level_2.gd" id="1_5orea"]
 [ext_resource type="Script" uid="uid://cwpqxg0mgikx1" path="res://scripts/game_manager.gd" id="2_vm7no"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="10_ndgrd"]
 [ext_resource type="Script" uid="uid://difx7c61kl5kw" path="res://scripts/trap/chamber_3.gd" id="11_k2aru"]
 [ext_resource type="PackedScene" uid="uid://bifhlpp7an5bf" path="res://scenes/boss.tscn" id="17_uo0vl"]
+[ext_resource type="PackedScene" uid="uid://d2wagsfie21w0" path="res://scenes/turret.tscn" id="19_ndgrd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt44k"]
 texture = ExtResource("3_hbb88")
@@ -221,6 +222,21 @@ sources/0 = SubResource("TileSetAtlasSource_bt44k")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5orea"]
 size = Vector2(48, 6.5)
 
+[sub_resource type="Animation" id="Animation_w200a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_0ourt"]
 resource_name = "rotate"
 length = 3.0
@@ -237,40 +253,10 @@ tracks/0/keys = {
 "values": [0.0, -1.5708, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_w200a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uo0vl"]
 _data = {
 &"RESET": SubResource("Animation_w200a"),
 &"rotate": SubResource("Animation_0ourt")
-}
-
-[sub_resource type="Animation" id="Animation_k2aru"]
-resource_name = "move"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(662, -23), Vector2(485, -23)]
 }
 
 [sub_resource type="Animation" id="Animation_ndgrd"]
@@ -288,6 +274,21 @@ tracks/0/keys = {
 "values": [Vector2(662, -23)]
 }
 
+[sub_resource type="Animation" id="Animation_k2aru"]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(662, -23), Vector2(485, -23)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h351q"]
 _data = {
 &"RESET": SubResource("Animation_ndgrd"),
@@ -299,6 +300,21 @@ size = Vector2(160, 16.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w200a"]
 size = Vector2(13, 48)
+
+[sub_resource type="Animation" id="Animation_h351q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1019, -24)]
+}
 
 [sub_resource type="Animation" id="Animation_uo0vl"]
 resource_name = "move"
@@ -316,7 +332,13 @@ tracks/0/keys = {
 "values": [Vector2(1019, -24), Vector2(805, -24)]
 }
 
-[sub_resource type="Animation" id="Animation_h351q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dpc8t"]
+_data = {
+&"RESET": SubResource("Animation_h351q"),
+&"move": SubResource("Animation_uo0vl")
+}
+
+[sub_resource type="Animation" id="Animation_itbe0"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -328,13 +350,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1019, -24)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dpc8t"]
-_data = {
-&"RESET": SubResource("Animation_h351q"),
-&"move": SubResource("Animation_uo0vl")
+"values": [Vector2(808, 5)]
 }
 
 [sub_resource type="Animation" id="Animation_ngvhw"]
@@ -351,21 +367,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(808, 5), Vector2(808, -123)]
-}
-
-[sub_resource type="Animation" id="Animation_itbe0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(808, 5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xrja0"]
@@ -564,6 +565,34 @@ position = Vector2(15.9999, -13.0001)
 
 [node name="TriggerArea" type="Area2D" parent="Traps/Chamber3/DeathPlatform"]
 
+[node name="Area2D2" type="Area2D" parent="Traps/Chamber3"]
+position = Vector2(380, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/Chamber3/Area2D2"]
+position = Vector2(1775, -104)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_dpc8t")
+
+[node name="DeathPlatform2" type="Node2D" parent="Traps/Chamber3"]
+position = Vector2(1195, -83)
+
+[node name="Platform" parent="Traps/Chamber3/DeathPlatform2" instance=ExtResource("6_hbb88")]
+position = Vector2(1016, -21)
+rotation = -1.5708
+
+[node name="Spikes" type="Node2D" parent="Traps/Chamber3/DeathPlatform2/Platform"]
+
+[node name="Spike" parent="Traps/Chamber3/DeathPlatform2/Platform/Spikes" instance=ExtResource("5_vm7no")]
+position = Vector2(-16.0001, -12.9999)
+
+[node name="Spike2" parent="Traps/Chamber3/DeathPlatform2/Platform/Spikes" instance=ExtResource("5_vm7no")]
+position = Vector2(-7.15256e-05, -13)
+
+[node name="Spike3" parent="Traps/Chamber3/DeathPlatform2/Platform/Spikes" instance=ExtResource("5_vm7no")]
+position = Vector2(15.9999, -13.0001)
+
+[node name="TriggerArea" type="Area2D" parent="Traps/Chamber3/DeathPlatform2"]
+
 [node name="Spikes" type="Node2D" parent="."]
 
 [node name="Spike" parent="Spikes" instance=ExtResource("5_vm7no")]
@@ -600,7 +629,7 @@ position = Vector2(472, 72)
 
 [node name="Player" parent="." instance=ExtResource("5_5orea")]
 unique_name_in_owner = true
-position = Vector2(-97, -4)
+position = Vector2(1671, -84)
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 zoom = Vector2(2.5, 2.5)
@@ -672,6 +701,9 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="turret" parent="." instance=ExtResource("19_ndgrd")]
+position = Vector2(1824, -88)
+
 [connection signal="timeout" from="GameManager/CorruptionTimer" to="GameManager" method="_on_corruption_timer_timeout"]
 [connection signal="timeout" from="GameManager/RestartTimer" to="GameManager" method="_on_restart_timer_timeout"]
 [connection signal="body_entered" from="Traps/Chamber1/Platform/Area2D" to="Traps/Chamber1/Platform" method="_on_area_2d_body_entered"]
@@ -683,6 +715,7 @@ autostart = true
 [connection signal="body_entered" from="Traps/Chamber2/Spike5/LastSpikeDeath" to="Traps/Chamber2" method="_on_last_spike_death_body_entered"]
 [connection signal="body_entered" from="Traps/Chamber3/Area2D" to="Traps/Chamber3" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Traps/Chamber3/Area2D" to="Traps/Chamber3" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Traps/Chamber3/Area2D2" to="Traps/Chamber3" method="_on_area_2d_2_body_entered"]
 [connection signal="body_entered" from="Patch/RunTrigger" to="Patch" method="_on_run_trigger_body_entered"]
 [connection signal="timeout" from="Patch/StopTimer" to="Patch" method="_on_stop_timer_timeout"]
 [connection signal="timeout" from="StartGame" to="." method="_on_start_game_timeout"]

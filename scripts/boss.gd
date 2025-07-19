@@ -19,15 +19,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func follow_player(delta):
-	player_pos = player.global_position
+	player_pos = player.position
+	
+	animated_sprite_2d.play("walk")
 	
 	if player_pos.x > self.global_position.x:
 		velocity.x += SPEED * delta
-		animated_sprite_2d.flip_h = false
-		
-	elif player_pos.x == self.global_position.x:
-		velocity.x -= SPEED * delta
 		animated_sprite_2d.flip_h = true
+		
+	elif player_pos.x < self.global_position.x:
+		velocity.x -= SPEED * delta
+		animated_sprite_2d.flip_h = false
 
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
