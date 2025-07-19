@@ -6,10 +6,15 @@ extends CharacterBody2D
 @onready var main_camera: Camera2D = $MainCamera
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 @onready var move_timer: Timer = $MoveTimer
+@onready var warning_timer: Timer = $WarningTimer
+@onready var invincibility_timer: Timer = $InvincibilityTimer
+@onready var hit_blinker_timer: Timer = $HitBlinkerTimer
+@onready var hurt_timer: Timer = $HurtTimer
 
 const SPEED : float = 100.0
 const JUMP_VELOCITY : float = -300.0
 const GRAVITY : float = 900.0
+const MAX_BLINKS := 6  # 3 visible + 3 invisible toggles
 
 # Movement
 var gravity_direction : int
@@ -29,13 +34,15 @@ var dead : bool = false
 var stay_dead : bool = false
 var was_moving_left : bool = false
 var was_moving_right : bool = false
-var has_warning_said : bool = false
 var warn_player : bool = false
 var strafe_detected : bool = false
+var is_hurt : bool = false
+var is_invincible : bool = false
 
 # VFX
 var shake_timer : float = 0.0
 var shake_intensity : float = 0.0
+var blink_count := 0
 
 func _ready() -> void:
 	last_position_x = 0
@@ -92,19 +99,31 @@ func apply_gravity(delta):
 
 func handle_animation():
 	if not dead:
-		if not is_airborne:
-			if direction != 0:
-				if animated_sprite.animation != "run":
-					animated_sprite.play("run")
-				animated_sprite.flip_h = reverse_control * direction < 0
+		if not is_hurt:
+			if not is_airborne:
+				if direction != 0:
+					if animated_sprite.animation != "run":
+						animated_sprite.play("run")
+					animated_sprite.flip_h = reverse_control * direction < 0
+				else:
+					
+					if animated_sprite.animation != "idle":
+						animated_sprite.play("idle")
 			else:
-				if animated_sprite.animation != "idle":
-					animated_sprite.play("idle")
+				
+				if animated_sprite.animation != "jump":
+					animated_sprite.play("jump")
+				if direction != 0:
+					animated_sprite.flip_h = reverse_control * direction < 0
+					
 		else:
-			if animated_sprite.animation != "jump":
-				animated_sprite.play("jump")
-			if direction != 0:
-				animated_sprite.flip_h = reverse_control * direction < 0
+			animated_sprite.play("hit")
+			
+			if not hit_blinker_timer.is_stopped():
+				hit_blinker_timer.stop()
+			
+			hit_blinker_timer.start()
+			
 	else:
 		if not stay_dead:
 			animated_sprite.play("death")
@@ -176,10 +195,16 @@ func check_for_key_strokes() -> void:
 		# No input detected
 		is_moving = false
 		
-		if not has_warning_said and warn_player:
-			sound_effects.play_sfx(sound_effects.SFX.STAND)
+		if warn_player:
+			var warn_idle : float = randi_range(1, 100)
 			
-			has_warning_said = true
+			if warn_idle <= 2:
+				if warn_idle <= 1:
+					sound_effects.play_sfx(sound_effects.SFX.IDLE_1)
+				else:
+					sound_effects.play_sfx(sound_effects.SFX.IDLE_2)
+				
+				warn_player = false
 		
 		reset_movement_flags()
 
@@ -187,16 +212,51 @@ func handle_corruption_timer() -> void:
 	check_for_key_strokes()
 	
 	# Only pause timer if player is moving or in a safe zone
-	if (is_moving or is_in_safe_zone) and not_strafe:
-		corruption_timer.paused = true
-	else:
-		corruption_timer.paused = false
+	if not game_manager.level_complete:
+		if (is_moving or is_in_safe_zone) and not_strafe:
+			corruption_timer.paused = true
+			game_manager.safe = true
+		else:
+			corruption_timer.paused = false
+			game_manager.safe = false
+
+func hurt():
+	if not is_invincible:
+		invincibility_timer.wait_time = 1.0
+		
+		hurt_timer.start()
+		invincibility_timer.start()
+		
+		is_invincible = true
+		is_hurt = true
 
 func _on_move_timer_timeout() -> void:
 	not_strafe = true
+	strafe_detected = false
 	
 	move_counter = 0
 
-
 func _on_warning_timer_timeout() -> void:
+	warning_timer.wait_time = randi_range(60, 180)
 	warn_player = true
+
+func _on_invincibility_timer_timeout() -> void:
+	is_invincible = false
+
+func _on_hit_blinker_timer_timeout() -> void:
+	if blink_count < MAX_BLINKS:
+		if animated_sprite.modulate.a == 0.0:
+			animated_sprite.modulate.a = 1.0
+		else:
+			animated_sprite.modulate.a = 0.0
+			
+		blink_count += 1
+		
+		hit_blinker_timer.start()
+	else:
+		# Reset visibility and blink counter
+		animated_sprite.modulate.a = 1.0
+		blink_count = 0
+
+func _on_hurt_timer_timeout() -> void:
+	is_hurt = false

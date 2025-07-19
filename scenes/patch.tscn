@@ -126,7 +126,8 @@ debug_color = Color(0.188741, 0.642136, 9.62615e-07, 0.42)
 shape = SubResource("RectangleShape2D_wvfq8")
 
 [node name="NextLevelTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
+one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_l8jle")

@@ -3,6 +3,7 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite
 @onready var collider: CollisionShape2D = $StaticBody/Collider
 @onready var timer: Timer = $Timer
+@onready var game_manager: Node = %GameManager
 
 var is_visible: bool = true
 var random_tile : Vector2

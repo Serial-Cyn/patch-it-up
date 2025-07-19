@@ -12,7 +12,8 @@ var patch_sfx = preload("res://assets/sounds/power_up.wav")
 var timer_has_started : bool = false
 var start_game : bool = false
 var blaring : bool = false
-
+var level_complete : bool = false
+var safe : bool = false
 
 func _process(_delta):
 	if start_game and not timer_has_started:
@@ -25,6 +26,11 @@ func _process(_delta):
 
 
 func update_timer(time_left : float):
+	if safe:
+		corruption_label.modulate = Color(0, 1, 0)
+	else:
+		corruption_label.modulate = Color(1, 1, 1)
+		
 	if time_left > 5.0:
 		corruption_label.text = str(int(time_left))		# Show whole numbers
 		
@@ -40,13 +46,26 @@ func update_timer(time_left : float):
 			
 			blaring = true
 			
-			
+func damage_player(amount : float) -> void:
+	if not player.is_invincible:
+		var new_time = corruption_timer.time_left - amount
+		new_time = max(0.0, new_time)
+		
+		player.shake_screen(1.0)
+		sound_effects.play_sfx(sound_effects.SFX.HURT)
+		player.hurt()
+		
+		corruption_timer.stop()
+		corruption_timer.start(new_time)
 
-	
+func stop_timer() -> void:
+	level_complete = true
+	corruption_timer.paused = true
+
 func _on_corruption_timer_timeout() -> void:
 	player.dead = true
 	restart_timer.start()
-
+	
 
 func _on_restart_timer_timeout() -> void:
 	get_tree().reload_current_scene()

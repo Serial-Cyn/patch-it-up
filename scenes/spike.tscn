@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvgrlr78gigtp"]
+
+[ext_resource type="Script" uid="uid://b0hdhxqx48jkh" path="res://scripts/spike.gd" id="1_7a7y0"]
+[ext_resource type="Texture2D" uid="uid://cu3k2jjl7dd62" path="res://assets/sprites/coin.png" id="1_ljd5v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7a7y0"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2mqm"]
+size = Vector2(8, 8)
+
+[node name="Spike" type="AnimatableBody2D"]
+script = ExtResource("1_7a7y0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ljd5v")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_7a7y0")
+debug_color = Color(1, 0.00961325, 0.0345042, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d2mqm")
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

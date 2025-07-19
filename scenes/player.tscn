@@ -320,10 +320,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ni07"]
-size = Vector2(9, 16)
+size = Vector2(7.5, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
-size = Vector2(7, 13)
+size = Vector2(6.5, 15.5)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_g2els")
@@ -331,26 +331,40 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_a38lo")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0.75, -6)
 shape = SubResource("RectangleShape2D_4ni07")
 
 [node name="Hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0.75, -5.25)
 shape = SubResource("RectangleShape2D_3vyb7")
 debug_color = Color(0.99847, 0, 0.14118, 0.42)
 
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 
 [node name="WarningTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 60.0
 one_shot = true
 autostart = true
 
+[node name="InvincibilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitBlinkerTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
 [connection signal="timeout" from="WarningTimer" to="." method="_on_warning_timer_timeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="HitBlinkerTimer" to="." method="_on_hit_blinker_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

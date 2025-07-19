@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cxhvbtt0tylxj"
-path="res://.godot/imported/stand.wav-4b93a64446e23dbc095613615276aeeb.sample"
+uid="uid://wngkvtpqinwt"
+path="res://.godot/imported/idle_1.wav-4acce8a2cc53264f5542963a41588e83.sample"
 
 [deps]
 
-source_file="res://assets/sounds/stand.wav"
-dest_files=["res://.godot/imported/stand.wav-4b93a64446e23dbc095613615276aeeb.sample"]
+source_file="res://assets/sounds/idle_1.wav"
+dest_files=["res://.godot/imported/idle_1.wav-4acce8a2cc53264f5542963a41588e83.sample"]
 
 [params]
 

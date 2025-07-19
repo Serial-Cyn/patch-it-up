@@ -3,9 +3,11 @@ extends CharacterBody2D
 @onready var next_level_timer: Timer = $NextLevelTimer
 @onready var player: CharacterBody2D = %Player
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
+@onready var game_manager: Node = %GameManager
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 
 
-const FILE_BEGIN = "res://levels/level"
+const FILE_BEGIN = "res://levels/level_"
 const FILE_END = ".tscn"
 
 var current_scene_file
@@ -38,17 +40,16 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				
 			2:
 				pass
-		
+				
+		game_manager.stop_timer()
 		sound_effects.play_sfx(sound_effects.SFX.PATCH)
-		
-		queue_free() # Destroys the patch
-		
 		next_level_timer.start()
+		animated_sprite.visible = false
 
 
 func next_level() -> void:
 	var next_level_number = current_level + 1
-		
+
 	var next_level_path = FILE_BEGIN + str(next_level_number) + FILE_END
 	get_tree().change_scene_to_file(next_level_path)
 
