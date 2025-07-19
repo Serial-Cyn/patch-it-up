@@ -22,6 +22,7 @@ var original_y : float = 0.0
 
 var taken : bool = false
 var can_run : bool = false
+var trigger : bool = false
 
 func _ready() -> void:
 	current_scene_file = get_tree().current_scene.scene_file_path
@@ -70,5 +71,10 @@ func _on_next_level_timer_timeout() -> void:
 
 
 func _on_run_trigger_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and not trigger:
 		can_run = true
+		trigger = true
+		$StopTimer.start()
+
+func _on_stop_timer_timeout() -> void:
+	can_run = false
