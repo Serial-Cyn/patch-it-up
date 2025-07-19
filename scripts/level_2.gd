@@ -4,10 +4,10 @@ extends Node2D
 @onready var chamber_1_death: Area2D = $Traps/Chamber1Death
 @onready var game_manager: Node = %GameManager
 @onready var start_game: Timer = %StartGame
+@onready var player: CharacterBody2D = %Player
 
-
-func _process(delta: float) -> void:
-	pass
+func _ready() -> void:
+	player.reverse_control = -1
 
 func _on_chamber_1_death_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

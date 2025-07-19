@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://c4vfu36ep35sq"]
+[gd_scene load_steps=33 format=4 uid="uid://c4vfu36ep35sq"]
 
 [ext_resource type="Script" uid="uid://dkr80ksoj51pq" path="res://scripts/intro.gd" id="1_btoec"]
 [ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="1_jirdo"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bpccl1tt3p3ht" path="res://scenes/patch.tscn" id="7_gwceb"]
 [ext_resource type="PackedScene" uid="uid://b31xhmb3jrhak" path="res://scenes/platform.tscn" id="7_nmsli"]
 [ext_resource type="PackedScene" uid="uid://cxca8wyds6jsp" path="res://scenes/death_zone.tscn" id="9_3sk1a"]
+[ext_resource type="AudioStream" uid="uid://bc11ln7l5dh7m" path="res://assets/sounds/patch-bgm.mp3" id="16_bgw3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt44k"]
 texture = ExtResource("1_jirdo")
@@ -684,6 +685,10 @@ unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_bgw3c")
+autoplay = true
 
 [connection signal="timeout" from="GameManager/CorruptionTimer" to="GameManager" method="_on_corruption_timer_timeout"]
 [connection signal="timeout" from="GameManager/RestartTimer" to="GameManager" method="_on_restart_timer_timeout"]

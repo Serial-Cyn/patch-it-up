@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://27r0o7tpefe1"]
+[gd_scene load_steps=16 format=4 uid="uid://27r0o7tpefe1"]
 
 [ext_resource type="Script" uid="uid://8vfncm6iybho" path="res://scripts/level_2.gd" id="1_eg35p"]
 [ext_resource type="Texture2D" uid="uid://datwx4c8g65vd" path="res://assets/sprites/patch-background_2.png" id="2_67vg4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cwpqxg0mgikx1" path="res://scripts/game_manager.gd" id="4_8swdu"]
 [ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="5_xe1ru"]
 [ext_resource type="Texture2D" uid="uid://cvmdi5akpghux" path="res://assets/sprites/world_tileset.png" id="6_6anhs"]
+[ext_resource type="AudioStream" uid="uid://bc11ln7l5dh7m" path="res://assets/sounds/patch-bgm.mp3" id="12_0unm6"]
 [ext_resource type="PackedScene" uid="uid://dpfp2gvrhdnd2" path="res://scenes/player.tscn" id="13_q26s8"]
 [ext_resource type="PackedScene" uid="uid://dqkbm4k1if4ml" path="res://scenes/alarm_effects.tscn" id="14_o87u6"]
 [ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="15_h3b7p"]
@@ -299,6 +300,10 @@ THANK YOU
 FOR PLAYING"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_0unm6")
+autoplay = true
 
 [connection signal="timeout" from="GameManager/CorruptionTimer" to="GameManager" method="_on_corruption_timer_timeout"]
 [connection signal="timeout" from="GameManager/RestartTimer" to="GameManager" method="_on_restart_timer_timeout"]

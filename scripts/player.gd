@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 @onready var hit_blinker_timer: Timer = $HitBlinkerTimer
 @onready var hurt_timer: Timer = $HurtTimer
+@onready var walk: AudioStreamPlayer2D = $Walk
 
 const SPEED : float = 100.0
 const JUMP_VELOCITY : float = -300.0
@@ -25,7 +26,7 @@ var move_right : int
 var not_strafe : bool = true
 var last_position_x : float
 var move_counter : int = 0
-var COYOTE_TIME : float = 0.3
+var COYOTE_TIME : float = 0.15
 var coyote_time_remaining : float = 0.0
 
 # States
@@ -112,10 +113,12 @@ func handle_animation():
 			if not is_airborne:
 				if direction != 0:
 					if animated_sprite.animation != "run":
+						walk.pitch_scale = randf_range(0.95, 1.05)
+						walk.play()
 						animated_sprite.play("run")
 					animated_sprite.flip_h = reverse_control * direction < 0
 				else:
-					
+					walk.stop()
 					if animated_sprite.animation != "idle":
 						animated_sprite.play("idle")
 			else:
@@ -141,7 +144,7 @@ func handle_animation():
 
 func start_anti_strafe() -> void:
 	not_strafe = false
-	move_counter = move_counter + 1
+	move_counter += 1
 	
 	if not strafe_detected and move_counter > 5:
 		sound_effects.play_sfx(sound_effects.SFX.ANTI)
@@ -246,7 +249,7 @@ func _on_move_timer_timeout() -> void:
 	move_counter = 0
 
 func _on_warning_timer_timeout() -> void:
-	warning_timer.wait_time = randi_range(60, 180)
+	warning_timer.wait_time = randi_range(30, 60)
 	warn_player = true
 
 func _on_invincibility_timer_timeout() -> void:

@@ -4,6 +4,7 @@ extends Area2D
 @onready var shoot_cooldown: Timer = $ShootCooldown
 @onready var marker_2d: Marker2D = $Marker2D
 @onready var boss: CharacterBody2D = %Boss
+@onready var sfx: AudioStreamPlayer2D = $SFX
 
 var laser = preload("res://scenes/turret_projectile.tscn")
 
@@ -11,8 +12,15 @@ var in_gun_zone : bool = false
 var shoot : bool = false
 var is_gun_cooldowned : bool = true
 var laser_shot : bool = false
+var charging : bool = false
+var ready_sfx : bool = true
 
 func _process(delta: float) -> void:
+	if in_gun_zone and not charging and ready_sfx:
+			sfx.play()
+			charging = true
+			ready_sfx = false
+			
 	if shoot:
 		animated_sprite_2d.play("shoot")
 		
@@ -21,13 +29,17 @@ func _process(delta: float) -> void:
 			beam.position = marker_2d.position
 			add_child(beam)
 			
+			charging = false
 			laser_shot = true
 		
 	elif in_gun_zone and is_gun_cooldowned:
 		animated_sprite_2d.play("charge")
 		
+		sfx.stream_paused = false
+		
 	else:
 		animated_sprite_2d.pause()
+		sfx.stream_paused = true
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -55,3 +67,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_shoot_cooldown_timeout() -> void:
 	is_gun_cooldowned = true
 	laser_shot = false
+	sfx.stop()
+	ready_sfx = true
+
+
+func _on_sfx_finished() -> void:
+	ready_sfx = true

@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://d2wagsfie21w0"]
+[gd_scene load_steps=32 format=3 uid="uid://d2wagsfie21w0"]
 
 [ext_resource type="Script" uid="uid://dxa3dyprriaxo" path="res://scripts/turret.gd" id="1_el7wl"]
 [ext_resource type="Texture2D" uid="uid://cm7om3aecoq0r" path="res://assets/sprites/patch-turret_spritesheet.png" id="2_485p4"]
+[ext_resource type="AudioStream" uid="uid://dwlud4ca6313b" path="res://assets/sounds/patch-turret.mp3" id="3_485p4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_485p4"]
 atlas = ExtResource("2_485p4")
@@ -226,7 +227,11 @@ one_shot = true
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(120, 0)
 
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_485p4")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="finished" from="SFX" to="." method="_on_sfx_finished"]
