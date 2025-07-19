@@ -51,12 +51,12 @@ func _on_trigger_area_body_entered(body: Node2D) -> void:
 		player.shake_screen(1.0)
 		sound_effects.play_sfx(sound_effects.SFX.EXPLOSION)
 		
-		await get_tree().create_timer(1.0).timeout # Adjust for actual duration
+		await get_tree().create_timer(1.0).timeout
 		
 		spikes.visible = true
 		player.shake_screen(1.0)
 		sound_effects.play_sfx(sound_effects.SFX.EXPLOSION)
 		
-		await get_tree().create_timer(1.0).timeout # Adjust for actual duration
+		await get_tree().create_timer(1.0).timeout
 		
 		animation_player.play("move")

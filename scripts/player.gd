@@ -25,6 +25,8 @@ var move_right : int
 var not_strafe : bool = true
 var last_position_x : float
 var move_counter : int = 0
+var COYOTE_TIME : float = 0.3
+var coyote_time_remaining : float = 0.0
 
 # States
 var is_airborne : bool
@@ -62,7 +64,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not dead:
-		handle_movement()
+		handle_movement(delta)
 		
 	apply_gravity(delta)
 	handle_animation()
@@ -73,20 +75,27 @@ func shake_screen(intensity : float, duration : float = 0.3) -> void:
 	shake_intensity = intensity
 	shake_timer = duration
 
-func handle_movement():
+func handle_movement(delta):
 	move_left = Input.get_action_strength("move_left")
 	move_right = Input.get_action_strength("move_right")
 	
 	direction = move_right - move_left
 	velocity.x = reverse_control * direction * SPEED
 	
+	if is_on_floor():
+		coyote_time_remaining = COYOTE_TIME
+	else:
+		coyote_time_remaining = max(coyote_time_remaining - delta, 0.0)
+	
 	if last_position_x != self.position.x:
 		is_moving = true
 	else:
 		is_moving = false
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time_remaining > 0.0):
 		velocity.y = JUMP_VELOCITY
+		coyote_time_remaining = 0.0  # Cancel coyote after using it
+		
 		
 		sound_effects.play_sfx(sound_effects.SFX.JUMP)
 	

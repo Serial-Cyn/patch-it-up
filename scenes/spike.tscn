@@ -100,7 +100,7 @@ script = ExtResource("1_7a7y0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8525u")
 autoplay = "default"
-frame_progress = 0.328992
+frame_progress = 0.216908
 
 [node name="HurtBox" type="Area2D" parent="."]
 

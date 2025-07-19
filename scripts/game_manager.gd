@@ -47,6 +47,9 @@ func update_timer(time_left : float):
 			blaring = true
 			
 func damage_player(amount : float) -> void:
+	if amount >= corruption_timer.time_left:
+		amount = corruption_timer.time_left - 0.5
+	
 	if not player.is_invincible:
 		var new_time = corruption_timer.time_left - amount
 		
