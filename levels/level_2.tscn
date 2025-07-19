@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="10_ndgrd"]
 [ext_resource type="Script" uid="uid://difx7c61kl5kw" path="res://scripts/trap/chamber_3.gd" id="11_k2aru"]
 [ext_resource type="PackedScene" uid="uid://bifhlpp7an5bf" path="res://scenes/boss.tscn" id="17_uo0vl"]
+[ext_resource type="PackedScene" uid="uid://d2wagsfie21w0" path="res://scenes/turret.tscn" id="19_ndgrd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt44k"]
 texture = ExtResource("3_hbb88")
@@ -571,6 +572,34 @@ position = Vector2(15.9999, -13.0001)
 
 [node name="TriggerArea" type="Area2D" parent="Traps/Chamber3/DeathPlatform"]
 
+[node name="Area2D2" type="Area2D" parent="Traps/Chamber3"]
+position = Vector2(380, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/Chamber3/Area2D2"]
+position = Vector2(1775, -104)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_dpc8t")
+
+[node name="DeathPlatform2" type="Node2D" parent="Traps/Chamber3"]
+position = Vector2(1195, -83)
+
+[node name="Platform" parent="Traps/Chamber3/DeathPlatform2" instance=ExtResource("6_hbb88")]
+position = Vector2(1016, -21)
+rotation = -1.5708
+
+[node name="Spikes" type="Node2D" parent="Traps/Chamber3/DeathPlatform2/Platform"]
+
+[node name="Spike" parent="Traps/Chamber3/DeathPlatform2/Platform/Spikes" instance=ExtResource("5_vm7no")]
+position = Vector2(-16.0001, -12.9999)
+
+[node name="Spike2" parent="Traps/Chamber3/DeathPlatform2/Platform/Spikes" instance=ExtResource("5_vm7no")]
+position = Vector2(-7.15256e-05, -13)
+
+[node name="Spike3" parent="Traps/Chamber3/DeathPlatform2/Platform/Spikes" instance=ExtResource("5_vm7no")]
+position = Vector2(15.9999, -13.0001)
+
+[node name="TriggerArea" type="Area2D" parent="Traps/Chamber3/DeathPlatform2"]
+
 [node name="Spikes" type="Node2D" parent="."]
 
 [node name="Spike" parent="Spikes" instance=ExtResource("5_vm7no")]
@@ -607,7 +636,7 @@ position = Vector2(472, 72)
 
 [node name="Player" parent="." instance=ExtResource("5_5orea")]
 unique_name_in_owner = true
-position = Vector2(-97, -4)
+position = Vector2(1671, -84)
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 zoom = Vector2(2.5, 2.5)
@@ -679,6 +708,9 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="turret" parent="." instance=ExtResource("19_ndgrd")]
+position = Vector2(1824, -88)
+
 [connection signal="timeout" from="GameManager/CorruptionTimer" to="GameManager" method="_on_corruption_timer_timeout"]
 [connection signal="timeout" from="GameManager/RestartTimer" to="GameManager" method="_on_restart_timer_timeout"]
 [connection signal="body_entered" from="Traps/Chamber1/Platform/Area2D" to="Traps/Chamber1/Platform" method="_on_area_2d_body_entered"]
@@ -690,6 +722,7 @@ autostart = true
 [connection signal="body_entered" from="Traps/Chamber2/Spike5/LastSpikeDeath" to="Traps/Chamber2" method="_on_last_spike_death_body_entered"]
 [connection signal="body_entered" from="Traps/Chamber3/Area2D" to="Traps/Chamber3" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Traps/Chamber3/Area2D" to="Traps/Chamber3" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Traps/Chamber3/Area2D2" to="Traps/Chamber3" method="_on_area_2d_2_body_entered"]
 [connection signal="body_entered" from="Patch/RunTrigger" to="Patch" method="_on_run_trigger_body_entered"]
 [connection signal="timeout" from="Patch/StopTimer" to="Patch" method="_on_stop_timer_timeout"]
 [connection signal="timeout" from="StartGame" to="." method="_on_start_game_timeout"]
