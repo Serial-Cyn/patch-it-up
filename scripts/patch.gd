@@ -10,6 +10,7 @@ extends CharacterBody2D
 
 const FILE_BEGIN = "res://levels/level_"
 const FILE_END = ".tscn"
+const SPEED : float = 100.0
 
 var current_scene_file
 var current_level
@@ -20,6 +21,7 @@ var float_time : float = 0.0
 var original_y : float = 0.0
 
 var taken : bool = false
+var can_run : bool = false
 
 func _ready() -> void:
 	current_scene_file = get_tree().current_scene.scene_file_path
@@ -31,6 +33,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	float_time += delta  # Keep counting time
 	position.y = original_y + sin(float_time * float_speed * TAU) * float_amplitude
+	
+func _physics_process(delta: float) -> void:
+	if can_run:
+		position.x += SPEED * delta
+		
 	
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -60,3 +67,8 @@ func next_level() -> void:
 
 func _on_next_level_timer_timeout() -> void:
 	next_level()
+
+
+func _on_run_trigger_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		can_run = true

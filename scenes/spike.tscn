@@ -100,7 +100,7 @@ script = ExtResource("1_7a7y0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8525u")
 autoplay = "default"
-frame_progress = 0.216908
+frame_progress = 0.125305
 
 [node name="HurtBox" type="Area2D" parent="."]
 
@@ -108,7 +108,7 @@ frame_progress = 0.216908
 shape = SubResource("RectangleShape2D_7a7y0")
 debug_color = Color(1, 0.00961325, 0.0345042, 0.42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d2mqm")
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
