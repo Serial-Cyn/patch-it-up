@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var death_platform_2: Node2D = $"../Traps/Chamber3/DeathPlatform2"
 
 
-const SPEED = 1.0
+const SPEED = 5.0
 
 var life : int = 3
 var dead : bool = false
