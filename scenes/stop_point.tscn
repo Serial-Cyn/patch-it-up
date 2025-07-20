@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://dihoti1hrgw6e"]
+[gd_scene load_steps=32 format=3 uid="uid://dihoti1hrgw6e"]
 
 [ext_resource type="Script" uid="uid://daghifr6k04f" path="res://scripts/stop_point.gd" id="1_ce4fe"]
 [ext_resource type="Texture2D" uid="uid://cm5x2beda172i" path="res://assets/sprites/patch-tileset_stopPointst.png" id="2_ce4fe"]
 [ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="3_i03o5"]
 [ext_resource type="AudioStream" uid="uid://cjna0mdxlay3p" path="res://assets/sounds/patch-stoppoint.mp3" id="4_lhoxb"]
+[ext_resource type="FontFile" uid="uid://do04mthks44vx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="5_23qb4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i03o5"]
 atlas = ExtResource("2_ce4fe")
@@ -244,6 +245,17 @@ tile_set = SubResource("TileSet_23qb4")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_lhoxb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 492.0
+offset_top = 16.0
+offset_right = 618.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("5_23qb4")
+theme_override_font_sizes/font_size = 11
+text = "TIMER PAUSED"
 
 [connection signal="body_entered" from="StopArea" to="." method="_on_stop_area_body_entered"]
 [connection signal="body_exited" from="StopArea" to="." method="_on_stop_area_body_exited"]

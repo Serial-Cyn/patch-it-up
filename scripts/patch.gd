@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var game_manager: Node = %GameManager
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var area_2d: Area2D = $Area2D
+@onready var label: Label = $"../UI/Label"
+@onready var label_2: Label = $"../UI/Label2"
 
 
 const FILE_BEGIN = "res://levels/level_"
@@ -46,12 +48,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		match current_level:
 			1:
 				player.gravity_direction = 1
-				
+				label.text = "sys/ai >>> CONTROLS REVERSED"
 				sound_effects.play_sfx(sound_effects.SFX.G_FIX)
 				
 			2:
 				player.reverse_control = 1
-				
+				label.text = ""
+				label_2.visible = false
 				sound_effects.play_sfx(sound_effects.SFX.C_FIX)
 				
 				next_level_timer.wait_time = 7.0

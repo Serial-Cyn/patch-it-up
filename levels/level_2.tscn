@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://b35dj1y66tcbh"]
+[gd_scene load_steps=47 format=4 uid="uid://b35dj1y66tcbh"]
 
 [ext_resource type="Script" uid="uid://8vfncm6iybho" path="res://scripts/level_2.gd" id="1_5orea"]
 [ext_resource type="Texture2D" uid="uid://datwx4c8g65vd" path="res://assets/sprites/patch-background_2.png" id="2_ndgrd"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://difx7c61kl5kw" path="res://scripts/trap/chamber_3.gd" id="11_k2aru"]
 [ext_resource type="PackedScene" uid="uid://bifhlpp7an5bf" path="res://scenes/boss.tscn" id="17_uo0vl"]
 [ext_resource type="PackedScene" uid="uid://d2wagsfie21w0" path="res://scenes/turret.tscn" id="19_ndgrd"]
+[ext_resource type="FontFile" uid="uid://73kps5h5d1qc" path="res://assets/fonts/PixelOperator8.ttf" id="20_itbe0"]
 [ext_resource type="PackedScene" uid="uid://dihoti1hrgw6e" path="res://scenes/stop_point.tscn" id="21_dpc8t"]
 [ext_resource type="AudioStream" uid="uid://bc11ln7l5dh7m" path="res://assets/sounds/patch-bgm.mp3" id="22_ngvhw"]
 
@@ -695,6 +696,25 @@ theme_override_font_sizes/font_size = 32
 text = "60"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 327.0
+offset_right = 260.0
+offset_bottom = 339.0
+theme_override_fonts/font = ExtResource("20_itbe0")
+theme_override_font_sizes/font_size = 11
+text = "sys/ai >>> CONTROLS REVERSED"
+
+[node name="Label2" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 23.0
+offset_right = 165.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("7_w200a")
+theme_override_font_sizes/font_size = 11
+text = "TASKS:
+LOCATE PATCHES"
 
 [node name="StartGame" type="Timer" parent="."]
 unique_name_in_owner = true

@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 @onready var death_platform_2: Node2D = $"../Traps/Chamber3/DeathPlatform2"
 @onready var walk: AudioStreamPlayer2D = $Walk
+@onready var label_2: Label = $"../UI/Label2"
+@onready var hit_timer: Timer = $hitTimer
 
 
 const SPEED = 5.0
@@ -16,6 +18,7 @@ var dead : bool = false
 var player_pos : Vector2
 
 var triggered : bool = false
+var hit : bool = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,8 +40,11 @@ func _physics_process(delta: float) -> void:
 func follow_player(delta):
 	player_pos = player.position
 	
-	animated_sprite_2d.play("walk")
-	
+	if not hit:
+		animated_sprite_2d.play("walk")
+	else:
+		animated_sprite_2d.play("hit")
+		
 	if not walk.playing:
 		walk.play()
 	
@@ -55,6 +61,8 @@ func damage():
 	life -= 1
 	sound_effects.play_sfx(sound_effects.SFX.EXPLOSION)
 	player.shake_screen(5.0)
+	hit_timer.start()
+	hit = true
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -63,7 +71,12 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "death":
+		label_2.text = "TASKS:\nLOCATE PATCHES"
 		sound_effects.play_sfx(sound_effects.SFX.EXPLOSION)
 		player.shake_screen(10.0)
 		death_platform_2.queue_free()
 		queue_free()
+
+
+func _on_hit_timer_timeout() -> void:
+	hit = false

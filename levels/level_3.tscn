@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=4 uid="uid://27r0o7tpefe1"]
+[gd_scene load_steps=17 format=4 uid="uid://27r0o7tpefe1"]
 
-[ext_resource type="Script" uid="uid://8vfncm6iybho" path="res://scripts/level_2.gd" id="1_eg35p"]
+[ext_resource type="Script" uid="uid://bcwrtbqkv64s7" path="res://scripts/level_3.gd" id="1_q42ux"]
 [ext_resource type="Texture2D" uid="uid://datwx4c8g65vd" path="res://assets/sprites/patch-background_2.png" id="2_67vg4"]
 [ext_resource type="Texture2D" uid="uid://cepq11y212qu3" path="res://assets/sprites/patch-background_1.png" id="3_mqvtj"]
 [ext_resource type="Script" uid="uid://cwpqxg0mgikx1" path="res://scripts/game_manager.gd" id="4_8swdu"]
 [ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="5_xe1ru"]
 [ext_resource type="Texture2D" uid="uid://cvmdi5akpghux" path="res://assets/sprites/world_tileset.png" id="6_6anhs"]
 [ext_resource type="AudioStream" uid="uid://bc11ln7l5dh7m" path="res://assets/sounds/patch-bgm.mp3" id="12_0unm6"]
+[ext_resource type="Texture2D" uid="uid://nld84hjcq15e" path="res://assets/sprites/button.png" id="12_wi0qq"]
 [ext_resource type="PackedScene" uid="uid://dpfp2gvrhdnd2" path="res://scenes/player.tscn" id="13_q26s8"]
 [ext_resource type="PackedScene" uid="uid://dqkbm4k1if4ml" path="res://scenes/alarm_effects.tscn" id="14_o87u6"]
 [ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="15_h3b7p"]
@@ -212,8 +213,8 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_jirdo")
 sources/0 = SubResource("TileSetAtlasSource_bt44k")
 
-[node name="Level_2" type="Node2D"]
-script = ExtResource("1_eg35p")
+[node name="Level_3" type="Node2D"]
+script = ExtResource("1_q42ux")
 metadata/_edit_vertical_guides_ = [400.0]
 
 [node name="GameManager" type="Node" parent="."]
@@ -276,15 +277,15 @@ rotation = -3.14159
 layer = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="UI1"]
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.351
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.351
 offset_left = -164.0
-offset_top = -68.5
+offset_top = -68.36
 offset_right = 164.0
-offset_bottom = 68.5
+offset_bottom = 68.64
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -301,9 +302,17 @@ FOR PLAYING"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="UI1"]
+offset_left = 221.0
+offset_top = 233.0
+offset_right = 417.0
+offset_bottom = 301.0
+icon = ExtResource("12_wi0qq")
+
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_0unm6")
 autoplay = true
 
 [connection signal="timeout" from="GameManager/CorruptionTimer" to="GameManager" method="_on_corruption_timer_timeout"]
 [connection signal="timeout" from="GameManager/RestartTimer" to="GameManager" method="_on_restart_timer_timeout"]
+[connection signal="pressed" from="UI1/Button" to="." method="_on_button_pressed"]

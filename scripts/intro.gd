@@ -9,6 +9,8 @@ extends Node2D
 @onready var death_platform: AnimatableBody2D = $DeathPlatform/Platform
 @onready var animation_player: AnimationPlayer = $DeathPlatform/Platform/AnimationPlayer
 @onready var spikes: Node2D = $DeathPlatform/Platform/Spikes
+@onready var label: Label = $UI/Label
+@onready var label_2: Label = $UI/Label2
 
 var death_triggered : bool = false
 
@@ -16,6 +18,8 @@ func _ready() -> void:
 	corruption_label.visible = false
 	death_platform.visible = false
 	spikes.visible = false
+	label.visible = false
+	label_2.visible = false
 	
 	for spike in spikes.get_children():
 		spike.get_node("HurtBox").monitoring = false
@@ -27,6 +31,11 @@ func _on_start_game_timeout() -> void:
 	# Starts the corruption timer
 	game_manager.start_game = true
 	corruption_label.visible = true
+	
+	#
+	label.visible = true
+	label.modulate = Color(1, 0, 0)
+	label_2.visible = true
 	
 	# Effects stuff
 	alarm_effects.blare_alarm()

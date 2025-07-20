@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bifhlpp7an5bf"]
+[gd_scene load_steps=25 format=3 uid="uid://bifhlpp7an5bf"]
 
 [ext_resource type="Texture2D" uid="uid://14b65v5wxn" path="res://assets/sprites/patch-slug_spritesheet.png" id="1_dlmty"]
 [ext_resource type="Script" uid="uid://dqqwm222urbbk" path="res://scripts/boss.gd" id="1_neq0i"]
@@ -51,6 +51,10 @@ region = Rect2(64, 96, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8eiau"]
 atlas = ExtResource("1_dlmty")
 region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh5fr"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn2fc"]
 atlas = ExtResource("1_dlmty")
@@ -117,6 +121,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qh5fr")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vn2fc")
 }],
 "loop": true,
@@ -152,7 +164,7 @@ script = ExtResource("1_neq0i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qh5fr")
-animation = &"idle"
+animation = &"hit"
 autoplay = "idle"
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -169,5 +181,10 @@ shape = SubResource("RectangleShape2D_neq0i")
 [node name="Walk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_jncid")
 
+[node name="hitTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="timeout" from="hitTimer" to="." method="_on_hit_timer_timeout"]

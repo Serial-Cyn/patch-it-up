@@ -6,6 +6,7 @@ extends Node2D
 @onready var death_platform_2: Node2D = $DeathPlatform2
 @onready var spikes2: Node2D = $DeathPlatform2/Platform/Spikes
 @onready var boss: CharacterBody2D = %Boss
+@onready var label_2: Label = $"../../UI/Label2"
 
 var triggered : bool = false
 var trigger_count : int = 0
@@ -34,6 +35,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and boss:
 		boss.triggered = true
 		trigger_count += 1
+		label_2.text = "TASKS:\nLOCATE PATCHES\nTERMINATE SLUG"
 		
 		if trigger_count > 1:
 			if not triggered:

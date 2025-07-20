@@ -5,6 +5,7 @@ extends Area2D
 @onready var marker_2d: Marker2D = $Marker2D
 @onready var boss: CharacterBody2D = %Boss
 @onready var sfx: AudioStreamPlayer2D = $SFX
+@onready var label: Label = $CanvasLayer/Label
 
 var laser = preload("res://scenes/turret_projectile.tscn")
 
@@ -15,6 +16,9 @@ var laser_shot : bool = false
 var charging : bool = false
 var ready_sfx : bool = true
 
+func _ready() -> void:
+	label.visible = false
+	
 func _process(delta: float) -> void:
 	if in_gun_zone and not charging and ready_sfx:
 			sfx.play()
@@ -45,11 +49,13 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_gun_zone = true
+		label.visible = true
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_gun_zone = false
+		label.visible = false
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

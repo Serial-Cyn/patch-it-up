@@ -5,9 +5,12 @@ extends Node2D
 @onready var game_manager: Node = %GameManager
 @onready var start_game: Timer = %StartGame
 @onready var player: CharacterBody2D = %Player
+@onready var label: Label = $UI/Label
 
 func _ready() -> void:
 	player.reverse_control = -1
+	if label:
+		label.modulate = Color(1, 0, 0)
 
 func _on_chamber_1_death_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

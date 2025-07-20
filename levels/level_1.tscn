@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://c4vfu36ep35sq"]
+[gd_scene load_steps=34 format=4 uid="uid://c4vfu36ep35sq"]
 
 [ext_resource type="Script" uid="uid://dkr80ksoj51pq" path="res://scripts/intro.gd" id="1_btoec"]
 [ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="1_jirdo"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b31xhmb3jrhak" path="res://scenes/platform.tscn" id="7_nmsli"]
 [ext_resource type="PackedScene" uid="uid://cxca8wyds6jsp" path="res://scenes/death_zone.tscn" id="9_3sk1a"]
 [ext_resource type="AudioStream" uid="uid://bc11ln7l5dh7m" path="res://assets/sounds/patch-bgm.mp3" id="16_bgw3c"]
+[ext_resource type="FontFile" uid="uid://73kps5h5d1qc" path="res://assets/fonts/PixelOperator8.ttf" id="16_lrvbd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt44k"]
 texture = ExtResource("1_jirdo")
@@ -679,6 +680,26 @@ theme_override_font_sizes/font_size = 32
 text = "60"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 8.0
+offset_top = 319.0
+offset_right = 474.0
+offset_bottom = 351.0
+theme_override_fonts/font = ExtResource("16_lrvbd")
+theme_override_font_sizes/font_size = 11
+text = "sys/ai >>> GRAVITY REVERSED
+sys/ai >>> CONTROLS REVERSED"
+
+[node name="Label2" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 23.0
+offset_right = 165.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("7_08mmt")
+theme_override_font_sizes/font_size = 11
+text = "TASKS:
+LOCATE PATCHES"
 
 [node name="StartGame" type="Timer" parent="."]
 unique_name_in_owner = true

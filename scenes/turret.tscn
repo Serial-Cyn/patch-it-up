@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://d2wagsfie21w0"]
+[gd_scene load_steps=33 format=3 uid="uid://d2wagsfie21w0"]
 
 [ext_resource type="Script" uid="uid://dxa3dyprriaxo" path="res://scripts/turret.gd" id="1_el7wl"]
 [ext_resource type="Texture2D" uid="uid://cm7om3aecoq0r" path="res://assets/sprites/patch-turret_spritesheet.png" id="2_485p4"]
 [ext_resource type="AudioStream" uid="uid://dwlud4ca6313b" path="res://assets/sounds/patch-turret.mp3" id="3_485p4"]
+[ext_resource type="FontFile" uid="uid://do04mthks44vx" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_pp6j5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_485p4"]
 atlas = ExtResource("2_485p4")
@@ -229,6 +230,17 @@ position = Vector2(120, 0)
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_485p4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 464.0
+offset_top = 16.0
+offset_right = 621.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("4_pp6j5")
+theme_override_font_sizes/font_size = 11
+text = "TURRET CHARGING"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
