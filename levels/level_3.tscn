@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b1crxyhou8hpp" path="res://assets/sprites/patch-tileset.png" id="5_xe1ru"]
 [ext_resource type="Texture2D" uid="uid://cvmdi5akpghux" path="res://assets/sprites/world_tileset.png" id="6_6anhs"]
 [ext_resource type="AudioStream" uid="uid://bc11ln7l5dh7m" path="res://assets/sounds/patch-bgm.mp3" id="12_0unm6"]
-[ext_resource type="Texture2D" uid="uid://nld84hjcq15e" path="res://assets/sprites/button.png" id="12_wi0qq"]
+[ext_resource type="Texture2D" uid="uid://dj0uhbd7m704r" path="res://assets/sprites/end button.png" id="12_q42ux"]
 [ext_resource type="PackedScene" uid="uid://dpfp2gvrhdnd2" path="res://scenes/player.tscn" id="13_q26s8"]
 [ext_resource type="PackedScene" uid="uid://dqkbm4k1if4ml" path="res://scenes/alarm_effects.tscn" id="14_o87u6"]
 [ext_resource type="PackedScene" uid="uid://k7rf7v6y40xi" path="res://scenes/sound_effects.tscn" id="15_h3b7p"]
@@ -303,11 +303,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="UI1"]
-offset_left = 221.0
-offset_top = 233.0
-offset_right = 417.0
-offset_bottom = 301.0
-icon = ExtResource("12_wi0qq")
+offset_left = 179.0
+offset_top = 225.0
+offset_right = 454.0
+offset_bottom = 314.0
+icon = ExtResource("12_q42ux")
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_0unm6")
