@@ -5,6 +5,7 @@ extends Node2D
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 @onready var death_platform_2: Node2D = $DeathPlatform2
 @onready var spikes2: Node2D = $DeathPlatform2/Platform/Spikes
+@onready var boss: CharacterBody2D = %Boss
 
 var triggered : bool = false
 var trigger_count : int = 0
@@ -31,6 +32,7 @@ func block_patch(show : bool):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
+		boss.triggered = true
 		trigger_count += 1
 		
 		if trigger_count > 1:

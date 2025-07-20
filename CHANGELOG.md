@@ -2,6 +2,28 @@
 
 All notable changes to this game project will be documented in this file.
 
+## [v0.4.0] – 2025-07-19
+
+### Added
+- New SFX!
+    - `WALK`
+    - `SLUG`
+    - `TURRET_CHARGING`
+    - `STOP_POINT`
+    - `IDLE_1`
+    - `IDLE_2`
+
+- New Sound called `Patch_It_Up!`
+- Level 3 Added as Victory State
+- Boss Added! He seems intimidating
+- Added Turret for shooting stuffs!
+
+### Changed
+- New Clean Background
+
+### Not Fixed
+- My sleep
+
 ## [v0.3.2] – 2025-07-18
 
 ### Added

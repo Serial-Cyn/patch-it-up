@@ -50,7 +50,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				sound_effects.play_sfx(sound_effects.SFX.G_FIX)
 				
 			2:
-				pass
+				player.reverse_control = 1
+				
+				sound_effects.play_sfx(sound_effects.SFX.C_FIX)
+				
+				next_level_timer.wait_time = 7.0
 		
 		taken = true
 		game_manager.stop_timer()

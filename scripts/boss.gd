@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var game_manager: Node = %GameManager
 @onready var sound_effects: AudioStreamPlayer2D = %SoundEffects
 @onready var death_platform_2: Node2D = $"../Traps/Chamber3/DeathPlatform2"
+@onready var walk: AudioStreamPlayer2D = $Walk
 
 
 const SPEED = 5.0
@@ -14,19 +15,22 @@ var life : int = 3
 var dead : bool = false
 var player_pos : Vector2
 
+var triggered : bool = false
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if life > 0:
-		follow_player(delta)
-	else:
-		velocity.x = 0
-		if not dead:
-			animated_sprite_2d.play("death")
-			
-			dead = true
+	if triggered:
+		if life > 0:
+			follow_player(delta)
+		else:
+			velocity.x = 0
+			if not dead:
+				animated_sprite_2d.play("death")
+				
+				dead = true
 	
 	move_and_slide()
 
@@ -34,6 +38,9 @@ func follow_player(delta):
 	player_pos = player.position
 	
 	animated_sprite_2d.play("walk")
+	
+	if not walk.playing:
+		walk.play()
 	
 	if player_pos.x > self.global_position.x:
 		velocity.x += SPEED * delta
