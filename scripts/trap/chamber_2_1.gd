@@ -22,6 +22,8 @@ var trigger : bool = false
 func _ready() -> void:
 	trigger_trap()
 	trigger_last_spike()
+	spike.DAMAGE = 60 
+	spike_2.DAMAGE = 60 
 	patch.visible = trigger
 	spike_3.visible = trigger
 	spike_4.visible = trigger

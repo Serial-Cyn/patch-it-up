@@ -31,7 +31,7 @@ func block_patch(show : bool):
 		spike.get_node("Collider").disabled = !show
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and boss:
 		boss.triggered = true
 		trigger_count += 1
 		
